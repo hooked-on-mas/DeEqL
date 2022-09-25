@@ -1,0 +1,11 @@
+#warning_api_key {
+    display: none;
+}
+
+#result {
+    white-space: pre-wrap;
+}
+
+#navbar_title {
+    font-size: x-large;
+}

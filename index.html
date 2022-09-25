@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+    <head>
+			<title>DeEqL --- 数式を含む英文を翻訳するツール</title>
+			<meta charset="UTF-8">
+			<meta name=”description” content=”数式を含む英文をDeepLで翻訳するツール．これを使えば英語が苦手な人でも，数式の入ったWikipediaなどのサイトや論文をDeepLで簡単に翻訳できるようになります．” />
+			<meta name="google-site-verification" content="CKlzYifQwG3jMUNWGtPesc-kCSmj2LBdkZE5O4FuEH0" />
+			<meta name="viewport" content="width=device-width, initial-scale=1">
+
+			<link rel="stylesheet" href="main.css">
+
+			<script type="text/javascript" src="main.js"></script>
+			<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+			<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+			<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+			<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+			<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" rel="stylesheet">
+			<meta name="google-site-verification" content="CKlzYifQwG3jMUNWGtPesc-kCSmj2LBdkZE5O4FuEH0" />
+			<meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+			<section class="hero is-info is-small">
+				<div class="hero-head">
+					<nav class="navbar">
+						<div class="container">
+							<div class="navbar-brand">
+								<a class="navbar-item" href="./index.html">
+									<p class="title" id="navbar_title">
+										DeEqL
+									</p>
+								</a>
+							</div>
+							<div class="navbar-menu">
+								<div class="navbar-end">
+									<a class="navbar-item is-active">
+										Home
+									</a>
+									<a class="navbar-item" href="https://hooked-on-mas.hatenablog.com/entry/2022/06/26/002728?_ga=2.94583961.4439452.1656160964-525354746.1602505894">
+										How to use (blog)
+									</a>
+									<a class="navbar-item" href="https://qiita.com/hook125/items/df5cdd2a82d964ffe3dd">
+										How to use (Qiita)
+									</a>
+								</div>
+							</div>
+						</div>
+					</nav>
+				</div>
+			
+				<!-- Hero content: will be in the middle -->
+				<div class="hero-body">
+					<div class="container">
+						<div class="columns">
+							<div class="column is-three-fifths">
+								<p class="title">
+									DeEqL
+								</p>
+								<p class="subtitle">
+									A Tool for translating English text containing mathematical equations
+								</p>
+							</div>
+							<div class="column">
+								<h3>
+									Enter your DeepL API key
+									<input class="input is-info is-rounded" id="deepl_api_key" type="text" placeholder="01234567-89a-bcde-fghi-jklmnopqrstu:fx">
+								</h3>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section class="section">
+				<div class="container">					
+					<div class="column is-8 is-offset-2">
+						<div class="content">
+							<h3 id="input">Input</h3>
+							<textarea class="textarea is-info" id="input_code" rows="7" placeholder="Enter a LaTeX code obtained from Mathipix such as&#10;---------------------------------------------------------&#10;Time-dependent Schrödinger equation&#10;$$&#10;i \hbar \frac{d}{d t}|\Psi(t)\rangle=\hat{H}|\Psi(t)\rangle&#10;$$&#10;---------------------------------------------------------"></textarea>
+							<br />
+							<button class="button is-block is-fullwidth is-info is-medium is-rounded" id="run_translation" onclick="runTranslation()">Run</button>
+
+							<h3 id="output">Output</h3>
+							<div class="card">
+								<div class="card-content">
+									<div class="content">
+										<div id="warning_api_key" class="notification is-danger is-light"></div>		
+										<p id="result"><font color="lightgray">時間依存のシュレーディンガー方程式 \[i \hbar \frac{d}{d t}|\Psi(t)\rangle=\hat{H}|\Psi(t)\rangle\]</font></p>
+									</div>
+								</div>
+							</div>
+
+							<br />
+							<div style="text-align: center;">
+								<button class="button is-info is-outlined is-small is-rounded" id="run_translation" onclick="captureOutput()">
+									<span class="icon">
+										<i class="fa fa-camera"></i>
+									</span>
+									<span>Capture the output</span>
+								</button>
+							</div>
+							
+						</div>
+					</div>
+				</div>
+
+			</section>
+        
+    </body>
+</html>
