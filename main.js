@@ -108,6 +108,13 @@ function runTranslation() {
 
             goOutputSection();
 
+            const editor = ace.edit("editor")
+            editor.setValue("")
+            // editor.session.insert(
+            //     editor.selection.getCursor(), translation_result
+            // );
+            editor.setValue(changeEquationForTexOutput(translation_result))
+
         }).catch(function(error) {
             document.getElementById('result').textContent = error.message;
         });
@@ -271,6 +278,14 @@ function changeEquationForMathjax(equation, is_inline_eq) {
     }
 
     return equation  
+
+}
+
+function changeEquationForTexOutput(outputForMathjax) {
+
+    let outputForTex = outputForMathjax.replace(/\\\(/g, '\$').replace(/\\\)/g, '\$').replace(/\\\[/g, "\$\$\$").replace(/\\\]/g, "\$\$\$");
+
+    return outputForTex
 
 }
 

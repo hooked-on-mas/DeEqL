@@ -12,6 +12,7 @@
 			<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 			<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 			<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.0/ace.js"></script>
 			<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
 			<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" rel="stylesheet">
 			<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -37,7 +38,7 @@
 										How to use (blog)
 									</a>
 									<a class="navbar-item" href="https://qiita.com/hook125/items/df5cdd2a82d964ffe3dd">
-										How to use (Qiita)
+										How to create (Qiita)
 									</a>
 									<a class="navbar-item" href="https://docs.google.com/forms/d/e/1FAIpQLScvmBfEA2uHZEPfB42Xj0_5YauH5J_32gfRBU7COn16aR2NhQ/viewform?usp=sf_link">
 										Feedback
@@ -99,6 +100,26 @@
 									<span>Capture the output</span>
 								</button>
 							</div>
+							
+							<br />
+
+							<h4 id="tex_output">TeX</h3>
+								
+							<div class="content" id="editor"></div>
+								<script>
+									const editor = ace.edit("editor");
+
+									editor.setTheme("ace/theme/sqlserver");
+									editor.getSession().setMode("ace/mode/tex");
+									editor.getSession().setUseWrapMode(true);
+									editor.setOptions({maxLines: Infinity});
+
+									editor.session.insert(
+										editor.selection.getCursor(), "時間依存のシュレーディンガー方程式\n$$\ni \\hbar \\frac{d}{d t}|\\Psi(t)\\rangle=\\hat{H}|\\Psi(t)\\rangle;\n$$"
+									);
+								</script>
+							<p>You need to load <i>amsmath</i>, <i>amssymb</i> and <i>amsfonts</i> to compile this code.</p>
+							
 							
 						</div>
 					</div>
