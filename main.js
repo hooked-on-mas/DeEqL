@@ -7,7 +7,7 @@ function resetTextbox() {
 function runTranslation() {
     const API_URL = 'https://api-free.deepl.com/v2/translate';
 
-    let substi_sets = {pre:"EQ", pre_small:"eq", len_num: 2, cnt: 0};
+    let substi_sets = {pre:"EQ", len_num: 2, cnt: 0};
 
     let equation_list = [];
 
@@ -108,11 +108,9 @@ function runTranslation() {
 
             goOutputSection();
 
+            // Texでの出力
             const editor = ace.edit("editor")
             editor.setValue("")
-            // editor.session.insert(
-            //     editor.selection.getCursor(), translation_result
-            // );
             editor.setValue(changeEquationForTexOutput(translation_result))
 
         }).catch(function(error) {
@@ -370,11 +368,7 @@ function replaceSubstiWithEquation(translation_result, equation_list, substi_set
 
         equation = equation_list[i];
 
-        substi = substi_sets.pre + String(i).padStart(substi_sets.len_num, '0');
-        translation_result = translation_result.replace(substi, equation);
-
-        // たまに翻訳によって，"EQxxxx"から"eqxxxx"になることがあるので．
-        substi = substi_sets.pre_small + String(i).padStart(substi_sets.len_num, '0');
+        substi = new RegExp(substi_sets.pre + String(i).padStart(substi_sets.len_num, '0'), "ig");
         translation_result = translation_result.replace(substi, equation);
     }
 
