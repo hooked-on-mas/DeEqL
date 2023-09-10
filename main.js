@@ -281,7 +281,7 @@ function changeEquationForMathjax(equation, is_inline_eq) {
 
 function changeEquationForTexOutput(outputForMathjax) {
 
-    let outputForTex = outputForMathjax.replace(/\\\(/g, '\$').replace(/\\\)/g, '\$').replace(/\\\[/g, "\$\$\$").replace(/\\\]/g, "\$\$\$");
+    let outputForTex = outputForMathjax.replace(/\\\(/g, '$$').replace(/\\\)/g, '$$').replace(/\\\[/g, "$$$$").replace(/\\\]/g, "$$$$");
 
     return outputForTex
 
