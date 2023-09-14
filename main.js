@@ -56,9 +56,9 @@ function runTranslation() {
 
     }
 
-    let latex_code = document.getElementById("input_code").value;
+    let original_latex_code = document.getElementById("input_code").value;
 
-    latex_code = preprocessLatexCode(latex_code);
+    let latex_code = preprocessLatexCode(original_latex_code);
 
     // 数式を一旦equation_listに保管して，EQxxで置き換える
     // 置換後のテキストはsubsti_code_listに入れる
@@ -116,7 +116,7 @@ function runTranslation() {
 
             // バグ報告ボタンのリンク先にTexプログラムを事前に入れておく
             let link = document.getElementById('report_bug');
-            link.setAttribute('href', 'https://docs.google.com/forms/d/e/1FAIpQLScvmBfEA2uHZEPfB42Xj0_5YauH5J_32gfRBU7COn16aR2NhQ/viewform?usp=pp_url&entry.1265959101=Your comment:%0A%0A--------------------------------------------------------------------------------------------------%0AInput: (Replace secret words with a string like xxx)%0A' + latex_code + '%0A--------------------------------------------------------------------------------------------------%0AOutput:%0A' + tex_output);
+            link.setAttribute('href', 'https://docs.google.com/forms/d/e/1FAIpQLScvmBfEA2uHZEPfB42Xj0_5YauH5J_32gfRBU7COn16aR2NhQ/viewform?usp=pp_url&entry.1265959101=Your comment:%0A%0A--------------------------------------------------------------------------------------------------%0AInput: (Replace secret words with a string like xxx)%0A' + original_latex_code + '%0A--------------------------------------------------------------------------------------------------%0AOutput:%0A' + tex_output);
 
         }).catch(function(error) {
             document.getElementById('result').textContent = error.message;
