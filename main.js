@@ -338,8 +338,6 @@ function keepLeftRightPair(equation) {
 
     let n_left  = (equation.match(/\\left[^a-z]/g)  || []).length;
     let n_right = (equation.match(/\\right[^a-z]/g) || []).length;
-    console.log(n_left)
-    console.log(n_right)
     let len_equation = equation.length;
     let len_equation_bra = 2; // the length of \\[ or \\]
 
