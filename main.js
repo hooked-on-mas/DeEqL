@@ -338,15 +338,21 @@ function keepLeftRightPair(equation) {
 
     let n_left  = (equation.match(/\\left[^a-z]/g)  || []).length;
     let n_right = (equation.match(/\\right[^a-z]/g) || []).length;
+    console.log(n_left)
+    console.log(n_right)
     let len_equation = equation.length;
     let len_equation_bra = 2; // the length of \\[ or \\]
 
     if (n_left == n_right) {
         ;
     } else if (n_left > n_right) {
-        equation = equation.slice(0, len_equation - len_equation_bra) + " \\right . " + equation.slice(len_equation - len_equation_bra);
+        for (let i = 0; i < n_left-n_right; i++){
+            equation = equation.slice(0, len_equation - len_equation_bra) + " \\right . " + equation.slice(len_equation - len_equation_bra);
+        }
     } else {
-        equation = equation.slice(0, len_equation_bra) + " \\left . " + equation.slice(2);
+        for (let i = 0; i < n_right-n_left; i++){
+            equation = equation.slice(0, len_equation_bra) + " \\left . " + equation.slice(2);
+        }
     }
 
     return equation
