@@ -313,7 +313,8 @@ function replaceEquationWithSubsti(equation, is_inline_eq, substi_sets) {
     } else {
 
         // 数式の末尾にカンマ・ピリオドがある場合のみ，それを数式の外に出す．
-        idx_punc = equation.search(/(\.|,|;)\s*\\]/);
+        // ただし、文末が\right. のときのみ、外には出さない。
+        idx_punc = equation.search(/(?<!\\right\s*)(\.|,|;)\s*\\]/);
         no_end_punc = (idx_punc == -1);
 
         substi = getSubstiString(substi_sets);
