@@ -141,7 +141,7 @@ function checkColonSemicolon(latex_code) {
         const note_colon = document.getElementById('note_colon');
         note_colon.style.display = 'block';
 
-        let note_content = "入力された文章には、<b>コロン</b>または<b>セミコロン</b>が含まれており、<u>翻訳が途切れる</u>可能性があります。<br />もし途切れている場合は、それらをピリオドに変えるなど、文章を訂正し再度 Run を押してください。<br /><br /><b>コロンまたはセミコロンが含まれる文</b>";
+        let note_content = "入力された文章には、<b>コロン</b>または<b>セミコロン</b>が含まれており、<u>翻訳が途切れる</u>可能性があります。<br />もし途切れている場合は、それらをピリオドに変えるなど、文章を訂正し再度 Run を押してください。<br /><b>Ctrl+f</b> を使うと、より探しやすいです。<br /><br /><b>コロンまたはセミコロンが含まれる文</b>";
 
         // 注記の内容を決めるため、
         // ピリオドの位置リストを取得
