@@ -251,15 +251,16 @@ function replaceEquationWithSubsti(equation, is_inline_eq, substi_sets) {
 
     let substi = "";
 
-    // 数式内にカンマ・ピリオドがある場合，前後で分割して，2つの数式にする
+    // インライン数式の場合 ($...$)
     if (is_inline_eq) {
 
+        // 数式内にカンマ・ピリオドがある場合，前後で分割して，2つの数式にする
         reduced_equation = equation;
         separated_equation = "";
 
         while (true) {
 
-            [separated_equation, reduced_equation, str_punc, idx_punc] = splitEquationBeforeAndAfterSymbol(reduced_equation, /\.|,|;/, is_inline_eq);
+            [separated_equation, reduced_equation, str_punc, idx_punc] = splitEquationBeforeAndAfterSymbol(reduced_equation, /(?<!(\\right|\left)\s*)(\.|,|;)/, is_inline_eq);
 
             if (idx_punc == -1) {
                 break;
@@ -289,6 +290,7 @@ function replaceEquationWithSubsti(equation, is_inline_eq, substi_sets) {
             
         }
 
+    // ブロック数式の場合 ($$...$$)
     } else {
 
         // 数式の末尾にカンマ・ピリオドがある場合のみ，それを数式の外に出す．
