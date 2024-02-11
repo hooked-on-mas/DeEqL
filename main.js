@@ -60,8 +60,8 @@ function runTranslation() {
 
     let latex_code = preprocessLatexCode(original_latex_code);
 
-    // コロンとセミコロンが文章内にあるかをチェックし、ある場合警告を出す。
-    checkColonSemicolon(latex_code);
+    // セミコロンが文章内にあるかをチェックし、ある場合警告を出す。
+    checkSemicolon(latex_code);
 
     // 数式を一旦equation_listに保管して，EQxxで置き換える
     // 置換後のテキストはsubsti_code_listに入れる
@@ -126,22 +126,21 @@ function runTranslation() {
         });
 }
 
-function checkColonSemicolon(latex_code) {
-    // コロンとセミコロンが文章内にあるかをチェックし、ある場合警告を出す。
-    // また、コロンとセミコロンを赤文字で表示させる。
+function checkSemicolon(latex_code) {
+    // セミコロンが文章内にあるかをチェックし、ある場合警告を出す。
+    // また、セミコロンを赤文字で表示させる。
 
-    // コロンとセミコロンの数を調べる
-    n_colon = (latex_code.match(/:/g)  || []).length;
+    // セミコロンの数を調べる
     n_semicolon = (latex_code.match(/;/g)  || []).length;
 
     // コロンまたはセミコロンが存在する場合、注記を表示させる
-    if (n_colon + n_semicolon > 0) {
+    if (n_semicolon > 0) {
 
         // 注記を表示
-        const note_colon = document.getElementById('note_colon');
-        note_colon.style.display = 'block';
+        const note_semicolon = document.getElementById('note_semicolon');
+        note_semicolon.style.display = 'block';
 
-        let note_content = "入力された文章には、<b>コロン</b>または<b>セミコロン</b>が含まれており、<u>翻訳が途切れる</u>可能性があります。<br />もし途切れている場合は、それらをピリオドに変えるなど、文章を訂正し再度 Run を押してください。<br /><br /><b>コロンまたはセミコロンが含まれる文</b>";
+        let note_content = "入力された文章には、<b>セミコロン</b>が含まれており、<u>翻訳が途切れる</u>可能性があります。<br />もし途切れている場合は、それらをピリオドに変えるなど、文章を訂正し再度 Run を押してください。<br /><br /><b>セミコロンが含まれる文</b>";
 
         // 注記の内容を決めるため、
         // ピリオドの位置リストを取得
@@ -151,27 +150,7 @@ function checkColonSemicolon(latex_code) {
             period_idices.push(match.index);
         }
     
-        // 各コロンまたはセミコロンが、どの行数にあるのかと、その周辺の文を示す。
-        let idx_colon = -1;
-        for (let i = 0; i < n_colon; i++){
-            // どの行数か
-            idx_colon = latex_code.indexOf(':', idx_colon+1);
-            const idx_period = latex_code.indexOf('.', idx_colon);
-            const line_num = period_idices.indexOf(idx_period);
-
-            // 周辺の文
-            const text = latex_code.slice(idx_colon-50, idx_colon) + "<font color=\"red\" size=4><strong>:</strong></font>" + latex_code.slice(idx_colon+1, idx_colon+51);
-
-            // 注記に書き込む
-            if (line_num != -1) {
-                note_content = note_content + "<br />" + line_num + "行目：" + text;
-            } else {
-                // コロンの後に、ピリオドがない場合
-                note_content = note_content + "<br />" + "最終行：" + text;
-            }
-            
-        }
-
+        // 各セミコロンが、どの行数にあるのかと、その周辺の文を示す。
         let idx_semicolon = -1;
         for (let i = 0; i < n_semicolon; i++){
             // どの行数か
@@ -193,11 +172,11 @@ function checkColonSemicolon(latex_code) {
         }
 
         // 注記の内容を表示する
-        note_colon.innerHTML = note_content;
+        note_semicolon.innerHTML = note_content;
     } else {
 
-        let note_colon = document.getElementById('note_colon');
-        note_colon.style.display = 'none';
+        let note_semicolon = document.getElementById('note_semicolon');
+        note_semicolon.style.display = 'none';
     }
 
 }
